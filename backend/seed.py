@@ -11,6 +11,7 @@ def seed_db():
     
     # Create some mock users
     mock_users = [
+        {"email": "azundowphilemon@gmail.com", "name": "Philemon Admin", "role": "Admin", "mobile": "0240000000"},
         {"email": "agent@falibari.com", "name": "Kwame Agent", "role": "Agent", "mobile": "0240000001"},
         {"email": "builder@falibari.com", "name": "Kofi Builder", "role": "Builder", "mobile": "0240000002"},
         {"email": "owner@falibari.com", "name": "Ama Owner", "role": "Buyer/Owner/Tenant", "mobile": "0240000003"}
