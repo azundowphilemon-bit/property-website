@@ -14,6 +14,7 @@ export default function UploadProperty() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [prefCity, setPrefCity] = useState('');
   const [userRole, setUserRole] = useState('');
+  const [isDemo, setIsDemo] = useState(false);
   
   const [newProperty, setNewProperty] = useState({
     title: '', 
@@ -130,11 +131,12 @@ export default function UploadProperty() {
         body: JSON.stringify({
           ...newProperty,
           price: parseFloat(newProperty.price) || 0,
-          bedrooms: parseInt(newProperty.bedrooms) || 0,
+           bedrooms: parseInt(newProperty.bedrooms) || 0,
           bathrooms: parseInt(newProperty.bathrooms) || 0,
           area_sqft: parseInt(newProperty.area_sqft) || 0,
           city_id: parseInt(newProperty.city_id),
-          image_urls: urls
+          image_urls: urls,
+          is_demo: isDemo ? 1 : 0
         })
       });
 
@@ -277,6 +279,17 @@ export default function UploadProperty() {
                   />
                 </label>
               </div>
+            </div>
+
+            <div className={styles.formGroup} style={{ display: 'flex', alignItems: 'center', gap: '8px', gridColumn: '1 / -1' }}>
+              <input 
+                type="checkbox" 
+                id="is_demo" 
+                checked={isDemo} 
+                onChange={(e) => setIsDemo(e.target.checked)} 
+                style={{ width: 'auto', transform: 'scale(1.2)', cursor: 'pointer' }}
+              />
+              <label htmlFor="is_demo" style={{ marginBottom: 0, cursor: 'pointer', color: '#6b7280', fontSize: '0.95rem' }}>Mark as Sample / Demo Listing (locks buy/rent actions for testing)</label>
             </div>
 
             <button type="submit" className={styles.submitButton} disabled={loading}>
