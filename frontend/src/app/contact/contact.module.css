@@ -1,0 +1,244 @@
+.main {
+  padding-top: 100px;
+  min-height: 100vh;
+  padding-bottom: 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  padding: 4rem 1.5rem 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-primary);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-family: var(--font-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 750px;
+  line-height: 1.7;
+}
+
+/* Content Grid */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.formCard {
+  padding: 3.5rem 3rem;
+  border-radius: 24px;
+}
+
+.formCard h2 {
+  font-size: 1.8rem;
+  font-family: var(--font-primary);
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.formSub {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 2.5rem;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.fullWidth {
+  grid-column: span 2;
+}
+
+.submitBtn {
+  grid-column: span 2;
+  border: none;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+/* Alert States */
+.alert {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  grid-column: span 2;
+}
+
+.alertSuccess {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #a7f3d0;
+}
+
+.alertError {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+/* Security Info Card */
+.infoCard {
+  padding: 3.5rem 2.5rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.securityIcon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--glass-border);
+  color: var(--accent-primary);
+}
+
+.infoCard h3 {
+  font-size: 1.4rem;
+  font-family: var(--font-primary);
+  margin-bottom: 1rem;
+}
+
+.infoCard p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 320px;
+}
+
+.infoDivider {
+  width: 100%;
+  height: 1px;
+  background: var(--glass-border);
+  margin: 2.5rem 0;
+}
+
+.infoDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.infoLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-primary);
+}
+
+.infoValue {
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+}
+
+.securitySeal {
+  margin-top: 3.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sealIcon {
+  width: 18px;
+  height: 18px;
+  color: var(--accent-primary);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .formCard {
+    padding: 2.5rem 1.5rem;
+  }
+  .infoCard {
+    padding: 3rem 1.5rem;
+  }
+  .form {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .fullWidth {
+    grid-column: span 1;
+  }
+  .submitBtn {
+    grid-column: span 1;
+  }
+}

@@ -1,0 +1,434 @@
+.main {
+  padding-top: 100px;
+  min-height: 100vh;
+  padding-bottom: 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 5rem 1.5rem 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -50%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-primary);
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-family: var(--font-primary);
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.heroSub {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 750px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.heroActions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Trust Stats Banner (Zillow Model) */
+.statsBanner {
+  margin-bottom: 6rem;
+  width: 100%;
+}
+
+.statsContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  flex-wrap: wrap;
+  gap: 2rem 1rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 180px;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: var(--font-primary);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.statDivider {
+  width: 1px;
+  height: 50px;
+  background: var(--glass-border);
+}
+
+/* Section Subtitle (Sotheby's style editorial tag) */
+.sectionSubtitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+  display: block;
+  text-transform: uppercase;
+}
+
+/* Mission Section */
+.missionSection {
+  margin-bottom: 6rem;
+}
+
+.missionCard {
+  position: relative;
+  padding: 3.5rem 3rem;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.missionAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+}
+
+.missionCard h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.missionCard p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.missionCard p:last-child {
+  margin-bottom: 0;
+}
+
+.accentText {
+  background: rgba(212, 175, 55, 0.03);
+  padding: 1.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  color: var(--text-primary) !important;
+  font-size: 1.1rem !important;
+}
+
+/* Services Section */
+.servicesSection {
+  margin-bottom: 6rem;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-primary);
+  letter-spacing: -0.02em;
+}
+
+.sectionSub {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin: 0 auto 3.5rem auto;
+  line-height: 1.65;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  text-align: left;
+}
+
+.serviceCard {
+  padding: 2.75rem 2rem;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.04) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.06);
+}
+
+.serviceCard:hover::before {
+  opacity: 1;
+}
+
+.serviceIcon {
+  font-size: 2.2rem;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.03);
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--glass-border);
+  color: var(--accent-primary);
+}
+
+.serviceCard h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+}
+
+.serviceCard p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* CEO Vision Section */
+.ceoSection {
+  margin-bottom: 6rem;
+}
+
+.ceoCard {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ceoContent {
+  padding: 4.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ceoTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.ceoContent h2 {
+  font-size: 2.2rem;
+  font-family: var(--font-primary);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.ceoQuote {
+  font-family: var(--font-secondary);
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1.5rem;
+}
+
+.ceoDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.ceoDetails strong {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.ceoDetails span {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.ceoImagePlaceholder {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(26, 34, 53, 0.4) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--glass-border);
+  padding: 3rem;
+  position: relative;
+}
+
+.ceoBadgeIcon {
+  width: 100px;
+  height: 100px;
+  color: rgba(212, 175, 55, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.ceoSignature {
+  font-family: 'Great Vibes', 'Brush Script MT', cursive, sans-serif;
+  font-size: 2.2rem;
+  color: var(--accent-secondary);
+  transform: rotate(-5deg);
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
+
+/* CTA Section */
+.cta {
+  text-align: center;
+}
+
+.ctaCard {
+  padding: 4.5rem 2.5rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: radial-gradient(circle at center, rgba(212, 175, 55, 0.05), transparent 60%);
+}
+
+.ctaCard h2 {
+  font-size: 2.2rem;
+  font-family: var(--font-primary);
+  margin-bottom: 1rem;
+}
+
+.ctaCard p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.ctaActions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Responsive Sizing */
+@media (max-width: 1024px) {
+  .ceoCard {
+    grid-template-columns: 1fr;
+  }
+  .ceoImagePlaceholder {
+    border-left: none;
+    border-top: 1px solid var(--glass-border);
+    padding: 4rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  .heroSub {
+    font-size: 1rem;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  .ceoContent h2 {
+    font-size: 1.8rem;
+  }
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+  .missionCard {
+    padding: 2.5rem 1.5rem;
+  }
+  .ceoContent {
+    padding: 3rem 1.5rem;
+  }
+  .statsContainer {
+    padding: 2rem 1rem;
+  }
+  .statDivider {
+    display: none;
+  }
+  .statItem {
+    min-width: 40%;
+  }
+}
