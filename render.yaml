@@ -3,6 +3,7 @@ services:
   - type: web
     name: falibari-backend
     runtime: python
+    plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: python -m uvicorn main_new:app --host 0.0.0.0 --port $PORT
@@ -22,6 +23,7 @@ services:
   - type: web
     name: falibari-frontend
     runtime: node
+    plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npm run start
