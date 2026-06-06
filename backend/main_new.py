@@ -103,6 +103,12 @@ def read_root():
 def admin_check():
     return {"status": "Backend is loading the correct file", "file": os.path.abspath(__file__)}
 
+@app.get("/api/make-all-demo-temporary-endpoint")
+def make_all_demo(db: Session = Depends(get_db)):
+    db.query(models.Property).update({models.Property.is_demo: 1})
+    db.commit()
+    return {"message": "All properties updated to demo sample listings successfully!"}
+
 # Mount the admin router
 app.include_router(admin.router)
 
