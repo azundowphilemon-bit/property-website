@@ -76,10 +76,92 @@ def seed_db():
             db.commit()
             db.refresh(city)
 
-        # No properties seeded automatically - user will upload them manually
+        # No random properties seeded
         pass
+
+    # Seed 4 official permanent sample properties (using user-provided custom images)
+    sample_props = [
+        {
+            "title": "Premium Luxury Villa",
+            "city_name": "Accra",
+            "description": "A magnificent luxury villa in Airport Residential Area, Accra. Featuring high-end finishes, open terrace, and spacious layout.",
+            "price": 8500000.0,
+            "type": "Buy",
+            "bedrooms": 4,
+            "bathrooms": 4,
+            "area_sqft": 3500,
+            "category": "House",
+            "image": "/static/accra_villa.jpg"
+        },
+        {
+            "title": "Modern Executive Duplex",
+            "city_name": "Kumasi",
+            "description": "Stunning top-view layout in Ahodwo, Kumasi. Featuring open floor plans, premium rooftop access, and beautiful landscaping.",
+            "price": 2500000.0,
+            "type": "Buy",
+            "bedrooms": 3,
+            "bathrooms": 3,
+            "area_sqft": 2400,
+            "category": "House",
+            "image": "/static/kumasi_villa.jpg"
+        },
+        {
+            "title": "Contemporary Smart Mansion",
+            "city_name": "Tamale",
+            "description": "Beautiful contemporary mansion in Tamale. High-ceiling windows, modern facade, and integrated smart home security system.",
+            "price": 4500000.0,
+            "type": "Buy",
+            "bedrooms": 5,
+            "bathrooms": 5,
+            "area_sqft": 4200,
+            "category": "House",
+            "image": "/static/tamale_mansion.jpg"
+        },
+        {
+            "title": "Elegant Modern Townhouse",
+            "city_name": "Wa",
+            "description": "Elegant modern townhouse in Wa. Includes security fence, built-in wardrobes, and garage for two vehicles.",
+            "price": 3500.0,
+            "type": "Rent",
+            "bedrooms": 3,
+            "bathrooms": 2,
+            "area_sqft": 1800,
+            "category": "House",
+            "image": "/static/wa_townhouse.jpg"
+        }
+    ]
+
+    for p_data in sample_props:
+        city = db.query(models.City).filter(models.City.name == p_data["city_name"]).first()
+        if city:
+            # Assign to the first user (Admin/Agent)
+            owner_id = user_objs[0].id if user_objs else None
+            prop = models.Property(
+                title=p_data["title"],
+                description=p_data["description"],
+                price=p_data["price"],
+                type=p_data["type"],
+                bedrooms=p_data["bedrooms"],
+                bathrooms=p_data["bathrooms"],
+                area_sqft=p_data["area_sqft"],
+                city_id=city.id,
+                user_id=owner_id,
+                category=p_data["category"],
+                is_demo=1
+            )
+            db.add(prop)
+            db.commit()
+            db.refresh(prop)
+
+            img = models.PropertyImage(
+                property_id=prop.id,
+                image_url=p_data["image"]
+            )
+            db.add(img)
+            db.commit()
+
     db.close()
-    print("Database seeded successfully with users and multi-image properties!")
+    print("Database seeded successfully with users and 4 custom permanent sample properties!")
 
 if __name__ == "__main__":
     seed_db()
