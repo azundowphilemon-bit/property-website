@@ -75,39 +75,8 @@ def seed_db():
             db.commit()
             db.refresh(city)
 
-        # Add 10 properties per city
-        for i in range(10):
-            p_type = random.choice(property_types)
-            p_title = random.choice(property_titles).format(type=p_type, city=city.name)
-            
-            price = random.uniform(500, 5000) if p_type == "Rent" else random.uniform(50000, 1000000)
-            rooms = random.randint(1, 6)
-            
-            prop = models.Property(
-                title=p_title + f" {i+1}",
-                description=f"A beautiful {p_type.lower()} property located in the heart of {city.name}. Features include modern amenities and scenic views.",
-                price=round(price, 2),
-                type=p_type,
-                bedrooms=rooms,
-                bathrooms=max(1, rooms - 1),
-                area_sqft=random.randint(500, 5000),
-                city_id=city.id,
-                user_id=random.choice(user_objs).id,
-                is_demo=1
-            )
-            db.add(prop)
-            db.commit()
-            db.refresh(prop)
-            
-            # Add images
-            for j in range(random.randint(2, 5)):
-                img = models.PropertyImage(
-                    property_id=prop.id,
-                    image_url=f"https://picsum.photos/seed/{city.name}{i}{j}/400/300"
-                )
-                db.add(img)
-    
-    db.commit()
+        # No properties seeded automatically - user will upload them manually
+        pass
     db.close()
     print("Database seeded successfully with users and multi-image properties!")
 
