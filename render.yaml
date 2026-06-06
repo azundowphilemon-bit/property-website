@@ -1,0 +1,30 @@
+services:
+  # Backend FastAPI Web Service
+  - type: web
+    name: falibari-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn main_new:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: JWT_SECRET
+        value: falibari_dev_secret_key_123!
+      - key: SMTP_USER
+        value: azundowphilemon@gmail.com
+      - key: SMTP_PASSWORD
+        value: tync czdi rsiw kzye
+      - key: SHEETS_WEBHOOK_URL
+        value: https://script.google.com/macros/s/AKfycbx4_3J7G88bScM3HLTGrk0TigIpGreK0A1Fhk_5KZ3qFoc6yhIViej9F14Gm6OrNHZgRA/exec
+      - key: FRONTEND_ORIGIN
+        value: http://localhost:3000
+
+  # Frontend Next.js Web Service
+  - type: web
+    name: falibari-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        value: https://falibari-backend.onrender.com
