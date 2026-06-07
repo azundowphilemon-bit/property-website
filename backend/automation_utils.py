@@ -31,15 +31,30 @@ def send_email(to_email, subject, body, is_html=True):
         content_type = 'html' if is_html else 'plain'
         msg.attach(MIMEText(body, content_type))
 
-        # Use SMTP_SSL for Port 465 (More reliable for App Passwords)
-        server = smtplib.SMTP_SSL(SMTP_SERVER, 465) 
-        # server.starttls() # Not needed for SSL connection
-        
-        server.login(SMTP_USER, SMTP_PASSWORD)
-        server.send_message(msg)
-        server.quit()
-        print(f"Email sent successfully to {to_email}")
-        return True
+        # Try Port 587 (STARTTLS) which is highly compatible with cloud platforms like Render
+        try:
+            print("Connecting to SMTP via Port 587 (STARTTLS)...")
+            server = smtplib.SMTP(SMTP_SERVER, 587, timeout=10)
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+            server.quit()
+            print(f"Email sent successfully via Port 587 to {to_email}")
+            return True
+        except Exception as e587:
+            print(f"Port 587 failed: {e587}. Trying Port 465 (SSL) fallback...")
+            try:
+                server = smtplib.SMTP_SSL(SMTP_SERVER, 465, timeout=10)
+                server.login(SMTP_USER, SMTP_PASSWORD)
+                server.send_message(msg)
+                server.quit()
+                print(f"Email sent successfully via Port 465 to {to_email}")
+                return True
+            except Exception as e465:
+                print(f"Port 465 failed: {e465}")
+                raise e465
     except Exception as e:
         error_msg = f"FAILED TO SEND EMAIL. Error: {e}"
         print(error_msg)
