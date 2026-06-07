@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import styles from './contact.module.css';
 
@@ -16,6 +17,28 @@ export default function ContactUs() {
   
   const [submitting, setSubmitting] = useState(false);
   const [statusMsg, setStatusMsg] = useState({ type: '', text: '' });
+  
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser);
+        setCurrentUser(parsed);
+        setFormData(prev => ({
+          ...prev,
+          name: parsed.full_name || '',
+          email: parsed.email || '',
+          mobile: parsed.mobile || '',
+        }));
+      } catch (e) {
+        console.error("Failed to parse user data", e);
+      }
+    }
+    setLoadingAuth(false);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +62,10 @@ export default function ContactUs() {
           type: 'success', 
           text: 'Inquiry securely submitted! Falibari Administration has received your request and logged it to our Google Sheets monitoring system. An email copy has been dispatched.' 
         });
-        setFormData({ name: '', email: '', mobile: '', message: '' });
+        setFormData(prev => ({
+          ...prev,
+          message: ''
+        }));
       } else {
         const errData = await res.json();
         setStatusMsg({ 
@@ -76,77 +102,106 @@ export default function ContactUs() {
         <section className={styles.contentGrid}>
           {/* Glass Form Card */}
           <div className={`${styles.formCard} glass animate-fade-in`}>
-            <h2>Secure Inquiry Form</h2>
-            <p className={styles.formSub}>Your submission will be instantly logged in our corporate ledger and reviewed by the CEO Board.</p>
-            
-            {statusMsg.text && (
-              <div className={`${styles.alert} ${statusMsg.type === 'success' ? styles.alertSuccess : styles.alertError}`}>
-                {statusMsg.type === 'success' ? '✓ ' : '⚠ '}
-                {statusMsg.text}
+            {loadingAuth ? (
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
+                <p style={{ color: 'var(--text-secondary)' }}>Verifying secure session...</p>
               </div>
+            ) : !currentUser ? (
+              <div className={styles.restrictedContainer}>
+                <div className={styles.lockIconContainer}>
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <h3>Access Restricted to Members</h3>
+                <p className={styles.restrictedText}>
+                  In compliance with our escrow protection model, you must be logged in to submit a secure inquiry to the Falibari Board.
+                </p>
+                <div className={styles.authButtons}>
+                  <Link href="/login" className="btn-primary" style={{ display: 'inline-block', width: '100%', maxWidth: '240px', textAlign: 'center', marginBottom: '4px' }}>
+                    Login to Account
+                  </Link>
+                  <Link href="/register" className="btn-secondary" style={{ display: 'inline-block', width: '100%', maxWidth: '240px', textAlign: 'center' }}>
+                    Register / Sign Up
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h2>Secure Inquiry Form</h2>
+                <p className={styles.formSub}>Your submission will be instantly logged in our corporate ledger and reviewed by the CEO Board.</p>
+                
+                {statusMsg.text && (
+                  <div className={`${styles.alert} ${statusMsg.type === 'success' ? styles.alertSuccess : styles.alertError}`}>
+                    {statusMsg.type === 'success' ? '✓ ' : '⚠ '}
+                    {statusMsg.text}
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="input-field"
+                      placeholder="Enter your full name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="input-field"
+                      placeholder="Enter your email address"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label htmlFor="mobile">Mobile Number *</label>
+                    <input
+                      type="tel"
+                      id="mobile"
+                      name="mobile"
+                      className="input-field"
+                      placeholder="e.g. +233 24 000 0000"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <div className={`${styles.formGroup} ${styles.fullWidth}`}>
+                    <label htmlFor="message">Detailed Message *</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      className="input-field"
+                      style={{ minHeight: '140px', resize: 'vertical' }}
+                      placeholder="State your property request, listing intention, or corporate inquiry..."
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+
+                  <button type="submit" className={`${styles.submitBtn} btn-primary`} disabled={submitting}>
+                    {submitting ? 'Submitting Ledger Record...' : 'Submit Secure Inquiry'}
+                  </button>
+                </form>
+              </>
             )}
-
-            <form onSubmit={handleSubmit} className={styles.form}>
-              <div className={styles.formGroup}>
-                <label htmlFor="name">Full Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="input-field"
-                  placeholder="Enter your full name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="email">Email Address *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="input-field"
-                  placeholder="Enter your email address"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="mobile">Mobile Number *</label>
-                <input
-                  type="tel"
-                  id="mobile"
-                  name="mobile"
-                  className="input-field"
-                  placeholder="e.g. +233 24 000 0000"
-                  value={formData.mobile}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                <label htmlFor="message">Detailed Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  className="input-field"
-                  style={{ minHeight: '140px', resize: 'vertical' }}
-                  placeholder="State your property request, listing intention, or corporate inquiry..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <button type="submit" className={`${styles.submitBtn} btn-primary`} disabled={submitting}>
-                {submitting ? 'Submitting Ledger Record...' : 'Submit Secure Inquiry'}
-              </button>
-            </form>
           </div>
 
           {/* Platform Security Information Card */}
