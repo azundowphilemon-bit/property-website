@@ -50,7 +50,6 @@ export default function Footer() {
 
       <div className={styles.bottomBar}>
         <p>© {currentYear} Falibari Real Estate. All rights reserved.</p>
-        <p className={styles.ceo}>Philemon Azundow (CEO)</p>
       </div>
     </footer>
   );

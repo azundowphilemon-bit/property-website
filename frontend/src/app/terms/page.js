@@ -79,7 +79,7 @@ export default function TermsAndConditions() {
               <ul>
                 <li><strong>Freeze:</strong> Raising a dispute immediately freezes all escrow funds and halts document transfers.</li>
                 <li><strong>Evidence:</strong> Both parties must submit proof (receipts, lease drafts, inspection reports) to our administrators within five (5) business days.</li>
-                <li><strong>CEO Verdict:</strong> The CEO of Falibari Real Estate, Philemon Azundow, or designated arbiters, will review the evidence and issue a binding resolution within ten (10) business days. Escrow funds will be returned or disbursed strictly in accordance with this verdict.</li>
+                <li><strong>CEO Verdict:</strong> The CEO of Falibari Real Estate, or designated arbiters, will review the evidence and issue a binding resolution within ten (10) business days. Escrow funds will be returned or disbursed strictly in accordance with this verdict.</li>
               </ul>
             </section>
 
@@ -93,7 +93,7 @@ export default function TermsAndConditions() {
             <section className={styles.section}>
               <h2>7. Limitation of Liability & Indemnification</h2>
               <p>
-                Falibari Real Estate operates as a secured marketplace directory and transaction escrow mediator. We do not accept liability for structural defects, tenant behavior, or market fluctuations. You agree to indemnify Falibari Real Estate and its executives, including Philemon Azundow (CEO), from any claims, actions, or losses arising from your use of the Platform or breaches of these Terms.
+                Falibari Real Estate operates as a secured marketplace directory and transaction escrow mediator. We do not accept liability for structural defects, tenant behavior, or market fluctuations. You agree to indemnify Falibari Real Estate and its executives from any claims, actions, or losses arising from your use of the Platform or breaches of these Terms.
               </p>
             </section>
 
