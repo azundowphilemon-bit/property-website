@@ -24,7 +24,8 @@ export default function UploadProperty() {
     bedrooms: 2, 
     bathrooms: 2, 
     area_sqft: 1200, 
-    city_id: ''
+    city_id: '',
+    area: ''
   });
 
   useEffect(() => {
@@ -212,6 +213,18 @@ export default function UploadProperty() {
                   <option key={city.id} value={city.id}>{city.name}</option>
                 ))}
               </select>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label>Area / Neighborhood</label>
+              <input 
+                type="text" 
+                className={styles.input}
+                placeholder="e.g. East Legon"
+                value={newProperty.area}
+                onChange={(e) => setNewProperty({...newProperty, area: e.target.value})}
+                required
+              />
             </div>
 
             <div className={styles.formGroup}>

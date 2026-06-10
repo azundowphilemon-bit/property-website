@@ -84,6 +84,7 @@ def seed_db():
         {
             "title": "Premium Luxury Villa",
             "city_name": "Accra",
+            "area": "Airport Residential",
             "description": "A magnificent luxury villa in Airport Residential Area, Accra. Featuring high-end finishes, open terrace, and spacious layout.",
             "price": 8500000.0,
             "type": "Buy",
@@ -96,6 +97,7 @@ def seed_db():
         {
             "title": "Modern Executive Duplex",
             "city_name": "Kumasi",
+            "area": "Ahodwo",
             "description": "Stunning top-view layout in Ahodwo, Kumasi. Featuring open floor plans, premium rooftop access, and beautiful landscaping.",
             "price": 2500000.0,
             "type": "Buy",
@@ -108,6 +110,7 @@ def seed_db():
         {
             "title": "Contemporary Smart Mansion",
             "city_name": "Tamale",
+            "area": "Fuo",
             "description": "Beautiful contemporary mansion in Tamale. High-ceiling windows, modern facade, and integrated smart home security system.",
             "price": 4500000.0,
             "type": "Buy",
@@ -120,6 +123,7 @@ def seed_db():
         {
             "title": "Elegant Modern Townhouse",
             "city_name": "Wa",
+            "area": "Wa Central",
             "description": "Elegant modern townhouse in Wa. Includes security fence, built-in wardrobes, and garage for two vehicles.",
             "price": 3500.0,
             "type": "Rent",
@@ -145,6 +149,7 @@ def seed_db():
                 bathrooms=p_data["bathrooms"],
                 area_sqft=p_data["area_sqft"],
                 city_id=city.id,
+                area=p_data.get("area", ""),
                 user_id=owner_id,
                 category=p_data["category"],
                 is_demo=1

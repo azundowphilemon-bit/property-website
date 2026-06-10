@@ -71,6 +71,7 @@ export default function Dashboard() {
     bathrooms: 2,
     area_sqft: 1200,
     city_id: '',
+    area: '',
   });
 
   useEffect(() => {
@@ -465,7 +466,7 @@ export default function Dashboard() {
 
       if (res.ok) {
         setSuccessMsg('Property listed successfully!');
-        setNewProperty({ title: '', description: '', price: '', type: 'Buy', category: 'Apartment', bedrooms: 2, bathrooms: 2, area_sqft: 1200, city_id: '' });
+        setNewProperty({ title: '', description: '', price: '', type: 'Buy', category: 'Apartment', bedrooms: 2, bathrooms: 2, area_sqft: 1200, city_id: '', area: '' });
         setSelectedFiles([]);
         setPreviewUrls([]);
       } else {
@@ -641,6 +642,11 @@ export default function Dashboard() {
                     <option value="" disabled>Select a city</option>
                     {sellCities.map(c => <option key={c.id} value={c.id}>{c.name} — {c.region}</option>)}
                   </select>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label>Area / Neighborhood *</label>
+                  <input className={styles.input} type="text" placeholder="e.g. East Legon" value={newProperty.area} onChange={e => setNewProperty({ ...newProperty, area: e.target.value })} required />
                 </div>
 
                 <div className={styles.formGroup}>

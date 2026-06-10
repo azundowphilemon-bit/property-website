@@ -39,6 +39,7 @@ class Property(Base):
     bathrooms = Column(Integer)
     area_sqft = Column(Integer)
     city_id = Column(Integer, ForeignKey("cities.id"))
+    area = Column(String, nullable=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
     is_demo = Column(Integer, default=0) # 0 = Real listing, 1 = Sample/Demo listing
 

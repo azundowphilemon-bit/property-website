@@ -104,7 +104,7 @@ export default function ComparisonDrawer({ cities }) {
                     const cityName = cities?.find(c => c.id === p.city_id)?.name || 'Unknown Location';
                     return (
                       <td key={p.id} className={styles.tdValue}>
-                        📍 {cityName}
+                        📍 {p.area ? `${p.area}, ${cityName}` : cityName}
                       </td>
                     );
                   })}

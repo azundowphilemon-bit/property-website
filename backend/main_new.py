@@ -64,6 +64,11 @@ try:
             conn.execute("UPDATE properties SET is_demo = 1")
             conn.commit()
             print("Database Migration: Added is_demo column and marked existing properties as samples.")
+        
+        if prop_columns and "area" not in prop_columns:
+            conn.execute("ALTER TABLE properties ADD COLUMN area TEXT")
+            conn.commit()
+            print("Database Migration: Added area column to properties table.")
 except Exception as e:
     print(f"Error during schema migration: {e}")
 
@@ -466,6 +471,7 @@ def create_property(
         bathrooms=property_data["bathrooms"],
         area_sqft=property_data["area_sqft"],
         city_id=property_data["city_id"],
+        area=property_data.get("area", ""),
         user_id=current_user.id,
         is_demo=property_data.get("is_demo", 0)
     )
@@ -858,6 +864,7 @@ def chatbot(data: dict, db: Session = Depends(get_db)):
             "bathrooms": p.bathrooms,
             "area_sqft": p.area_sqft,
             "city_id": p.city_id,
+            "area": getattr(p, "area", ""),
             "image_url": img_url,
             "is_demo": getattr(p, "is_demo", 0)
         }

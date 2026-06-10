@@ -81,7 +81,8 @@ export default function PropertyDetails() {
   const city = cities.find(c => c.id === property.city_id)?.name || 'Unknown Location';
 
   const handleInterest = () => {
-    setInterestMessage(`I am interested in the property: "${property.title}" (ID: ${property.id}) listed at GHS ${property.price.toLocaleString()} in ${city}. Please provide more details.`);
+    const locationStr = property.area ? `${property.area}, ${city}` : city;
+    setInterestMessage(`I am interested in the property: "${property.title}" (ID: ${property.id}) listed at GHS ${property.price.toLocaleString()} in ${locationStr}. Please provide more details.`);
     setContactModalOpen(true);
   };
 
@@ -125,7 +126,7 @@ export default function PropertyDetails() {
               <h1 className={styles.title}>{property.title}</h1>
               <div className={styles.location}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
-                {city}
+                {property.area ? `${property.area}, ${city}` : city}
               </div>
             </div>
 
